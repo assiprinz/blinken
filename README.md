@@ -25,4 +25,5 @@ There are 5 input modes (configurable in `blinken.js`):
 * 4 - Right mode: The original input width is drawn from the right, the height is scaled to the output height.
 
 # What it does not do (for now)
+I have not yet integrated proper option arguments on initialization, Configuration has to be done in the `blinken.js` file for now.
 blinken does not yet support other video sources, although I have successfully played around with a combination of ffmpeg and socket.io to simulate live video input. This is merely a base for everything you can come up with.
