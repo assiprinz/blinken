@@ -1,5 +1,7 @@
 # blinken
-A 3D web-based RGB LED / NeoPixel Array Simulator in three.js
+A 3D web-based RGB LED / NeoPixel Array Simulator in three.js.
+
+A live demo can be found at [stfu.janeberl.de/blinken](https://stfu.janeberl.de/blinken/)
 
 ![ScreenShot](blinken_screenshot.png)
 
