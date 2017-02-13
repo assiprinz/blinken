@@ -38,6 +38,12 @@ Blinken.prototype.init = function () {
     if (this.consoleEnabled) {
         $('#console').addClass('on');
     }
+
+    this.conGeometries = document.getElementById('con-geometries');
+    this.conCalls = document.getElementById('con-calls');
+    this.conFaces = document.getElementById('con-faces');
+    this.conVerts = document.getElementById('con-verts');
+
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 0.1, 1000 );
     this.renderer = new THREE.WebGLRenderer({
@@ -190,10 +196,10 @@ Blinken.prototype.console = function () {
     if (!this.consoleEnabled) return;
     this.countFps();
     if (this.frames % 30 == 0) {
-        $('#con-geometries', '#console').html(this.renderer.info.memory.geometries);
-        $('#con-calls', '#console').html(this.renderer.info.render.calls);
-        $('#con-faces', '#console').html(this.renderer.info.render.faces);
-        $('#con-verts', '#console').html(this.renderer.info.render.vertices);
+        this.conGeometries.textContent = this.renderer.info.memory.geometries;
+        this.conCalls.textContent = this.renderer.info.render.calls;
+        this.conFaces.textContent = this.renderer.info.render.faces;
+        this.conVerts.textContent = this.renderer.info.render.vertices;
     }
 };
 
