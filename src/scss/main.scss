@@ -1,0 +1,87 @@
+$globalmargin: 5px;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html, body {
+    width: 100%;
+    height: 100%;
+    background: #f0f0f0;
+    font-size: 10px;
+    font-family: Helvetica, Arial, sans-serif;
+    color: #333;
+}
+#vcontainer {
+    position: absolute;
+    top: $globalmargin;
+    left: $globalmargin;
+    height: 100px;
+    #v {
+        height: 100px;
+        width: auto;
+        min-width: 80px;
+        position: relative;
+        object-fit: fill;
+        background: #444;
+        box-shadow: 0 0 10px rgba(0,0,0,.1);
+    }
+    #dropzone {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 10px;
+        display: table;
+        cursor: default;
+        .dropzone {
+            cursor: default;
+            width: 100%;
+            height: 100%;
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+            font-weight: bold;
+            font-size: 12px;
+            color: #fff;
+            text-shadow: 0 0 3px rgba(0,0,0,.9);
+        }
+    }
+}
+#credit {
+    opacity: .5;
+    font-size: 8px;
+    position: absolute;
+    bottom: $globalmargin;
+    right: $globalmargin;
+    pointer-events: none;
+}
+#console {
+    display: none;
+    position: fixed;
+    bottom: $globalmargin;
+    left: $globalmargin;
+    width: 100px;
+    pointer-events: none;
+    &.on {
+        display: block;
+    }
+    .row {
+        display: block;
+        clear: both;
+        height: 0;
+        pointer-events: none;
+    }
+    .left {
+        display: block;
+        float: left;
+        pointer-events: none;
+    }
+    .right {
+        display: block;
+        float: right;
+        pointer-events: none;
+    }
+}

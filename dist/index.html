@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>blinken</title>
+    </head>
+    <link rel="stylesheet" href="css/style.min.css" />
+    <body>
+        <img id="img" src="img/img.png" style="display: none;" />
+        <img id="img2" src="img/img2.png" style="display: none;" />
+        <div id="vcontainer">
+            <video id="v" loop autoplay muted>
+                <source src="vid/bunny.mp4" type="video/mp4" />
+            </video>
+            <div id="dropzone"></div>
+            <!-- <p>drop video into preview</p> -->
+        </div>
+        <div id="console">
+            <div class="row"><strong><span class="left">fps</span><span class="right" id="fps"></span></strong></div>
+            <div class="row"><span class="left">geometries</span><span class="right" id="con-geometries"></span></div>
+            <div class="row"><span class="left">calls</span><span class="right" id="con-calls"></span></div>
+            <div class="row"><span class="left">faces</span><span class="right" id="con-faces"></span></div>
+            <div class="row"><span class="left">verts</span><span class="right" id="con-verts"></span></div>
+        </div>
+        <a href="https://github.com/assiprinz"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+        <div id="credit">Created 2017 by Jan Eberl, MIT License</div>
+        <script src="https://cdn.socket.io/socket.io-1.3.2.js"></script>
+        <script src="js/lib/jquery-3.1.0.min.js" charset="utf-8"></script>
+        <script src="js/lib/three.min.js" charset="utf-8"></script>
+        <script src="js/lib/OrbitControls.js" charset="utf-8"></script>
+        <script src="js/blinken.min.js" charset="utf-8"></script>
+        <script>
+            window.display = new Blinken(document.getElementById('v'));
+            document.getElementById('dropzone').appendChild(dropZone());
+        </script>
+    </body>
+</html>
