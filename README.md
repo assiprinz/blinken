@@ -10,11 +10,11 @@ The code is not documented at the moment. What the tool does is simple: Spawn a 
 
 # Modes
 There are 5 modes at the moment (configurable in `blinken.js`):
-0. Scaled mode: The input is scaled onto the output matrix both in width and height.
-1. Top mode: The original input height is drawn from the top, the width is scaled to the output width.
-2. Bottom mode: The original input height is drawn from the bottom, the width is scaled to the output width.
-3. Left mode: The original input width is drawn from the left, the height is scaled to the output height.
-4. Right mode: The original input width is drawn from the right, the height is scaled to the output height.
+* 0 - Scaled mode: The input is scaled onto the output matrix both in width and height.
+* 1 - Top mode: The original input height is drawn from the top, the width is scaled to the output width.
+* 2 - Bottom mode: The original input height is drawn from the bottom, the width is scaled to the output width.
+* 3 - Left mode: The original input width is drawn from the left, the height is scaled to the output height.
+* 4 - Right mode: The original input width is drawn from the right, the height is scaled to the output height.
 
 # What it does not do (for now)
 blinken does not yet support other video sources, although I have successfully playerd around with a combination of ffmpeg and socket.io to simulate live video input. This is merely a base for everything you can come up with.
