@@ -1,7 +1,7 @@
 # blinken
 A 3D web-based RGB LED / NeoPixel Array Simulator in three.js
 
-![ScreenShot](blinken_screenshot.jpg)
+![ScreenShot](blinken_screenshot.png)
 
 # How to build & run
 Contents in the dist folder are pre-built.
