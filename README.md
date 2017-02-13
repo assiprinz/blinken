@@ -1,12 +1,14 @@
 # blinken
 A 3D web-based RGB LED / NeoPixel Array Simulator in three.js
 
+![ScreenShot](blinken_screenshot.jpg)
+
 # How to build & run
 Contents in the dist folder are pre-built.
 If you plan on developing in the source folder, simply `$ npm install` and `$ grunt`. A watcher task can be launched with `grunt run`
 
 # What it does
-The code is not documented at the moment. What the tool does is simple: Spawn a set number of 3d Objects (matrix of x by y, configurable in `blinken.js`) and apply emissive material colors to them based on a given array of RGB values. This mode of input has been chosen because of the nature of data input one would give a real, physical RGB LED hardware array. The source for the color information is a video input, simulated by an HTML5 video element. A sample video is included, you can drag & drop any video file supported by your browser onto the video preview to load and play it.
+blinken simulates an RGB matrix (dots or NeoPixel are simulated at the moment) and spawns a set number of 3d Objects (matrix of x by y, configurable in `blinken.js`) and applies emissive material colors to them based on a given array of RGB values. This mode of input has been chosen because of the nature of data input one would give a real, physical RGB LED hardware array. The source for the color information is a video input, simulated by an HTML5 video element. A sample video is included, you can drag & drop any video file supported by your browser onto the video preview to load and play it.
 
 # Modes
 There are 5 modes at the moment (configurable in `blinken.js`):
