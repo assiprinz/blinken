@@ -12,7 +12,9 @@ If you plan on developing in the source folder, simply run `$ npm install` to in
 # What it does
 blinken simulates an RGB matrix (dots or NeoPixel are simulated at the moment) and spawns a set number of 3d Objects (matrix of x by y, configurable in `blinken.js`) and applies emissive material colors to them based on a given array of RGB values. This mode of input has been chosen because of the nature of data input one would give a real, physical RGB LED hardware array. The source for the color information is a video input, simulated by an HTML5 video element. A sample video is included, you can drag & drop any video file supported by your browser onto the video preview to load and play it.
 
-# Modes
+# Configuration
+You can change width or height of the matrix in `blinken.js` by editing the `mWidth`and `mheight` attributes. Be careful though, high values tend to have a huge performance impact.
+
 There are two hardware modes (configurable as `neoPixel` bool variable in `blinken.js`), resulting in dot or NeoPixel Cube style display.
 
 There are 5 input modes (configurable in `blinken.js`):
