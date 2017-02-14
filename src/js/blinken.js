@@ -31,7 +31,8 @@ function Blinken (src) {
         removeRow: this.removeRow.bind(this),
         addCol: this.addCol.bind(this),
         removeCol: this.removeCol.bind(this),
-        drawMode: this.drawMode.bind(this)
+        drawMode: this.drawMode.bind(this),
+        toggleConsole: this.toggleConsole.bind(this)
     }
     this.init();
 }
@@ -49,6 +50,7 @@ Blinken.prototype.init = function () {
         $('#console').addClass('on');
     }
 
+    $(document).on('click', '[gui-action=toggleConsole]', this.bounds.toggleConsole);
     $(document).on('click', '[gui-action=togglePixelMode]', this.bounds.togglePixelMode);
     $(document).on('click', '[gui-action=toggleRotate]', this.bounds.toggleRotate);
     $(document).on('click', '[gui-action=addRow]', this.bounds.addRow);
@@ -58,6 +60,7 @@ Blinken.prototype.init = function () {
     $(document).on('change', '[gui-action=drawMode]', this.bounds.drawMode);
 
     this.conGeometries = document.getElementById('con-geometries');
+    this.conNumpix = document.getElementById('con-numpix');
     this.conRows = document.getElementById('con-rows');
     this.conCols = document.getElementById('con-cols');
     this.conCalls = document.getElementById('con-calls');
@@ -190,6 +193,7 @@ Blinken.prototype.populate = function () {
         }
     }
 
+    this.conNumpix.textContent = this.mWidth * this.mHeight;
     this.conRows.textContent = this.mHeight;
     this.conCols.textContent = this.mWidth;
 
@@ -215,6 +219,15 @@ Blinken.prototype.setDotColor = function (y, x, color) {
 ██    ██ ██    ██ ██
  ██████   ██████  ██
 */
+
+Blinken.prototype.toggleConsole = function () {
+    this.consoleEnabled = !this.consoleEnabled;
+    if (this.consoleEnabled) {
+        $('#console').show();
+    } else {
+        $('#console').hide();
+    }
+};
 
 Blinken.prototype.togglePixelMode = function () {
     this.cleanup();

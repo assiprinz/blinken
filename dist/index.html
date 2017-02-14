@@ -15,6 +15,7 @@
             <div id="dropzone"></div>
         </div>
         <div id="gui">
+            <a id="toggleConsole" gui-action="toggleConsole">Toggle Debug Info</a>
             <a id="toggleMode" gui-action="togglePixelMode">Toggle Pixel Shape</a>
             <a id="toggleRotate" gui-action="toggleRotate">Toggle Rotation</a>
             <a id="addRow" gui-action="addRow">+ row</a>
@@ -31,6 +32,7 @@
             </select>
         </div>
         <div id="console">
+            <div class="row"><span class="left">pixels</span><span class="right" id="con-numpix"></span></div>
             <div class="row"><span class="left">rows</span><span class="right" id="con-rows"></span></div>
             <div class="row"><span class="left">columns</span><span class="right" id="con-cols"></span></div>
             <div class="row"><strong><span class="left">fps</span><span class="right" id="fps"></span></strong></div>
