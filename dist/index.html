@@ -13,7 +13,10 @@
                 <source src="vid/bunny.mp4" type="video/mp4" />
             </video>
             <div id="dropzone"></div>
-            <!-- <p>drop video into preview</p> -->
+        </div>
+        <div id="gui">
+            <a id="toggleMode" gui-action="togglePixelMode">Toggle Pixel Shape</a>
+            <a id="toggleRotate" gui-action="toggleRotate">Toggle Rotation</a>
         </div>
         <div id="console">
             <div class="row"><strong><span class="left">fps</span><span class="right" id="fps"></span></strong></div>
@@ -31,7 +34,11 @@
         <script src="js/blinken.min.js" charset="utf-8"></script>
         <script>
             window.display = new Blinken(document.getElementById('v'));
-            document.getElementById('dropzone').appendChild(dropZone());
+            if (!is_touch_device()) {
+                document.getElementById('dropzone').appendChild(dropZone());
+            } else {
+                $('body').addClass('touch');
+            }
         </script>
     </body>
 </html>

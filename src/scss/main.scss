@@ -12,6 +12,12 @@ html, body {
     font-size: 10px;
     font-family: Helvetica, Arial, sans-serif;
     color: #333;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 #vcontainer {
     position: absolute;
@@ -58,6 +64,23 @@ html, body {
     right: $globalmargin;
     pointer-events: none;
 }
+#gui {
+    display: block;
+    width: auto;
+    margin: $globalmargin auto 0;
+    text-align: center;
+    a {
+        display: inline-block;
+        padding: 4px;
+        background: #222;
+        color: #f0f0f0;
+        cursor: pointer;
+        font-weight: bold;
+        &:hover {
+            background: #1fa9cf;
+        }
+    }
+}
 #console {
     display: none;
     position: fixed;
@@ -84,4 +107,8 @@ html, body {
         float: right;
         pointer-events: none;
     }
+}
+body.touch #vcontainer #dropzone {
+    display: none;
+    visibility: hidden;
 }

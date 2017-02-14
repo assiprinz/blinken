@@ -22,7 +22,12 @@ function Blinken (src) {
     this.frameTimeIndex = 0;
     this.totalTimeForFrames = 0;
     this.probe = false;
+    this.ref = [];
     this.mode = 0; // 0: scaled full input, 1: first row, 2: last row, 3: left col, 4: right col;
+    this.bounds = {
+        togglePixelMode: this.togglePixelMode.bind(this),
+        toggleRotate: this.toggleRotate.bind(this)
+    }
     this.init();
 }
 
@@ -39,6 +44,9 @@ Blinken.prototype.init = function () {
         $('#console').addClass('on');
     }
 
+    $(document).on('click', '[gui-action=togglePixelMode]', this.bounds.togglePixelMode);
+    $(document).on('click', '[gui-action=toggleRotate]', this.bounds.toggleRotate);
+
     this.conGeometries = document.getElementById('con-geometries');
     this.conCalls = document.getElementById('con-calls');
     this.conFaces = document.getElementById('con-faces');
@@ -53,6 +61,9 @@ Blinken.prototype.init = function () {
     this.renderer.setSize( window.innerWidth, window.innerHeight );
     document.body.appendChild( this.renderer.domElement );
     this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+
+    this.addObject(new THREE.AmbientLight(0x909090));
+
     var that = this;
 
     this.src.addEventListener('play', this.updateV.bind(this), true);
@@ -66,8 +77,13 @@ Blinken.prototype.init = function () {
     });
     this.then = Date.now() / 1000;
     this.populate();
-
+    this.start();
 };
+
+Blinken.prototype.addObject = function (obj) {
+    this.ref.push(obj);
+    this.scene.add(obj);
+}
 
 /*
 ██████  ███████ ███    ██ ██████  ███████ ██████
@@ -83,7 +99,6 @@ Blinken.prototype.render = function () {
         this.running = false;
         return;
     }
-    this.running = true;
     this.frames++;
     this.push(this.readVidElement());
     if (this.rotate) {
@@ -102,6 +117,7 @@ Blinken.prototype.stop = function () {
 Blinken.prototype.start = function () {
     this.shouldReturn = false;
     if (!this.running) {
+        this.running = true;
         requestAnimationFrame( this.loop );
     }
 };
@@ -114,8 +130,6 @@ Blinken.prototype.updateV = function () {
 
 Blinken.prototype.populate = function () {
 
-    this.scene.add(new THREE.AmbientLight(0x909090));
-
     var boardGeometry = new THREE.BoxGeometry( this.mWidth + 1, this.mHeight + 1, 1);
     var boardMat = new THREE.MeshStandardMaterial({
         color: 0x444444,
@@ -126,8 +140,6 @@ Blinken.prototype.populate = function () {
     var geometry;
     var geometry = this.neoPixel ? new THREE.BoxGeometry( .92, .92, .92 ) : new THREE.SphereGeometry( .2, 32, 32 ) ;
     board.position.set( .5, -.5, this.neoPixel ? -.1 : -.5 );
-
-    this.scene.add(board);
 
     this.dotGroup = new THREE.Group();
     for (var y = 1; y <= this.mHeight; y++) {
@@ -147,8 +159,9 @@ Blinken.prototype.populate = function () {
     this.dotGroup.position.y += this.mHeight * .5;
     this.dots = new THREE.Group();
     this.dots.add(this.dotGroup);
+    this.dots.add(board);
 
-    this.scene.add( this.dots );
+    this.addObject( this.dots );
 
     if (this.helpersEnabled) {
         this.axis = new THREE.AxisHelper(4);
@@ -161,13 +174,11 @@ Blinken.prototype.populate = function () {
             this.gridHelper = new THREE.GridHelper( Math.max(this.mWidth, this.mHeight) + 10, Math.max(this.mWidth, this.mHeight) + 10, 0xdddddd, 0xdddddd );
             this.gridHelper.position.z = - 4;
             this.gridHelper.rotation.x = deg2rad(-90);
-            this.scene.add( this.gridHelper );
+            this.addObject( this.gridHelper );
         }
     }
 
     this.camera.position.z = Math.max(this.mWidth, this.mHeight) + 10;
-
-    this.loop();
 };
 
 Blinken.prototype.baseMaterial = function() {
@@ -182,7 +193,45 @@ Blinken.prototype.setDotColor = function (y, x, color) {
     this.linearMatrix[i].material.emissive = new THREE.Color(color);
 };
 
+/*
+ ██████  ██    ██ ██
+██       ██    ██ ██
+██   ███ ██    ██ ██
+██    ██ ██    ██ ██
+ ██████   ██████  ██
+*/
 
+Blinken.prototype.togglePixelMode = function () {
+    this.cleanup();
+    this.neoPixel = !this.neoPixel;
+    this.populate();
+    this.start();
+};
+
+Blinken.prototype.toggleRotate = function () {
+    this.rotate = !this.rotate;
+};
+
+Blinken.prototype.cleanup = function () {
+    this.matrix = [];
+    this.linearMatrix = [];
+    this.frames = 0;
+    var that = this;
+    for (var i = 0; i < this.ref.length; i++) {
+        this.scene.remove(this.ref[i]);
+        if (this.ref[i].traverse) {
+            this.ref[i].traverse(function(o){
+                that.dealloc(o);
+            });
+        }
+    }
+};
+
+Blinken.prototype.dealloc = function (obj) {
+    if (obj.geometry) obj.geometry.dispose();
+    if (obj.material) obj.material.dispose();
+    if (obj.texture) obj.texture.dispose();
+};
 
 /*
 ██████  ███████ ██████  ██    ██  ██████
@@ -256,7 +305,9 @@ Blinken.prototype.push = function (data) {
         this.probe = false;
     }
     for (var i = 0; i < data.length; i++) {
-        this.linearMatrix[i].material.emissive = new THREE.Color(data[i]);
+        if (this.linearMatrix[i]) {
+            this.linearMatrix[i].material.emissive = new THREE.Color(data[i]);
+        }
     }
 
 };
@@ -269,7 +320,10 @@ Blinken.prototype.push = function (data) {
 ██████  ██   ██ ██   ██  ██████      ██████       ██████  ██   ██  ██████  ██
 */
 
-
+function is_touch_device() {
+  return 'ontouchstart' in window        // works on most browsers
+      || navigator.maxTouchPoints;       // works on IE10/11 and Surface
+};
 
 function dropZone( imgCallback ) {
     var dropzone = document.createElement( 'div' );
