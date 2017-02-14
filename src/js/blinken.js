@@ -4,7 +4,7 @@ function deg2rad (angle) {
 
 function Blinken (src) {
     this.consoleEnabled = true;
-    this.neoPixel = true;
+    this.cube = true;
     this.mWidth = 32;
     this.mHeight = 18;
     this.rotate = false;
@@ -148,8 +148,8 @@ Blinken.prototype.populate = function () {
     var board = new THREE.Mesh(boardGeometry, boardMat);
 
     var geometry;
-    var geometry = this.neoPixel ? new THREE.BoxGeometry( .92, .92, .92 ) : new THREE.SphereGeometry( .2, 32, 32 ) ;
-    board.position.set( .5, -.5, this.neoPixel ? -.1 : -.5 );
+    var geometry = this.cube ? new THREE.BoxGeometry( .92, .92, .92 ) : new THREE.SphereGeometry( .2, 32, 32 ) ;
+    board.position.set( .5, -.5, this.cube ? -.1 : -.5 );
 
     this.dotGroup = new THREE.Group();
     for (var y = 1; y <= this.mHeight; y++) {
@@ -213,7 +213,7 @@ Blinken.prototype.setDotColor = function (y, x, color) {
 
 Blinken.prototype.togglePixelMode = function () {
     this.cleanup();
-    this.neoPixel = !this.neoPixel;
+    this.cube = !this.cube;
     this.populate();
     this.start();
 };
