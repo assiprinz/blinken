@@ -223,6 +223,8 @@ Blinken.prototype.drawMode = function (e) {
     if (m === '') {
         return;
     }
+    console.log(m);
+    console.log(parseInt(m));
     this.mode = parseInt(m);
 };
 
