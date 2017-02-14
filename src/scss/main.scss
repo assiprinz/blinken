@@ -69,19 +69,32 @@ html, body {
     width: auto;
     margin: $globalmargin auto 0;
     text-align: center;
+    user-select: none;
     a {
         display: inline-block;
-        padding: 4px;
+        padding: 4px 8px 4px;
         background: #222;
         color: #f0f0f0;
         cursor: pointer;
         font-weight: bold;
+        border-radius: 5px;
         &:hover {
             background: #1fa9cf;
         }
     }
+    #drawMode {
+        display: inline-block;
+        padding: 4px;
+        height: 21px;
+        background: #222;
+        color: #f0f0f0;
+        cursor: pointer;
+        font-weight: bold;
+        outline: none;
+    }
 }
 #console {
+    user-select: none;
     display: none;
     position: fixed;
     bottom: $globalmargin;

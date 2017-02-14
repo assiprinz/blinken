@@ -26,7 +26,12 @@ function Blinken (src) {
     this.mode = 0; // 0: scaled full input, 1: first row, 2: last row, 3: left col, 4: right col;
     this.bounds = {
         togglePixelMode: this.togglePixelMode.bind(this),
-        toggleRotate: this.toggleRotate.bind(this)
+        toggleRotate: this.toggleRotate.bind(this),
+        addRow: this.addRow.bind(this),
+        removeRow: this.removeRow.bind(this),
+        addCol: this.addCol.bind(this),
+        removeCol: this.removeCol.bind(this),
+        drawMode: this.drawMode.bind(this)
     }
     this.init();
 }
@@ -46,6 +51,11 @@ Blinken.prototype.init = function () {
 
     $(document).on('click', '[gui-action=togglePixelMode]', this.bounds.togglePixelMode);
     $(document).on('click', '[gui-action=toggleRotate]', this.bounds.toggleRotate);
+    $(document).on('click', '[gui-action=addRow]', this.bounds.addRow);
+    $(document).on('click', '[gui-action=removeRow]', this.bounds.removeRow);
+    $(document).on('click', '[gui-action=addCol]', this.bounds.addCol);
+    $(document).on('click', '[gui-action=removeCol]', this.bounds.removeCol);
+    $(document).on('change', '[gui-action=drawMode]', this.bounds.drawMode);
 
     this.conGeometries = document.getElementById('con-geometries');
     this.conCalls = document.getElementById('con-calls');
@@ -204,6 +214,43 @@ Blinken.prototype.setDotColor = function (y, x, color) {
 Blinken.prototype.togglePixelMode = function () {
     this.cleanup();
     this.neoPixel = !this.neoPixel;
+    this.populate();
+    this.start();
+};
+
+Blinken.prototype.drawMode = function (e) {
+    var m = $('#drawMode').val();
+    if (m === '') {
+        return;
+    }
+    this.mode = parseInt(m);
+};
+
+Blinken.prototype.addRow = function () {
+    this.cleanup();
+    this.mHeight++;
+    this.populate();
+    this.start();
+};
+Blinken.prototype.removeRow = function () {
+    this.cleanup();
+    if (this.mHeight > 1) {
+        this.mHeight--;
+    }
+    this.populate();
+    this.start();
+};
+Blinken.prototype.addCol = function () {
+    this.cleanup();
+    this.mWidth++;
+    this.populate();
+    this.start();
+};
+Blinken.prototype.removeCol = function () {
+    this.cleanup();
+    if (this.mWidth > 1) {
+        this.mWidth--;
+    }
     this.populate();
     this.start();
 };

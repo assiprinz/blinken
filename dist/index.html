@@ -17,6 +17,18 @@
         <div id="gui">
             <a id="toggleMode" gui-action="togglePixelMode">Toggle Pixel Shape</a>
             <a id="toggleRotate" gui-action="toggleRotate">Toggle Rotation</a>
+            <a id="addRow" gui-action="addRow">+ row</a>
+            <a id="removeRow" gui-action="removeRow">- row</a>
+            <a id="addCol" gui-action="addCol">+ col</a>
+            <a id="removeCol" gui-action="removeCol">- col</a>
+            <select id="drawMode" gui-action="drawMode">
+                <option value="">draw mode</option>
+                <option value="0">0 - scaled</option>
+                <option value="1">1 - top</option>
+                <option value="2">2 - bottom</option>
+                <option value="3">3 - left</option>
+                <option value="4">4 - right</option>
+            </select>
         </div>
         <div id="console">
             <div class="row"><strong><span class="left">fps</span><span class="right" id="fps"></span></strong></div>
