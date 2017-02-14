@@ -8,7 +8,7 @@ function Blinken (src) {
     this.mWidth = 32;
     this.mHeight = 18;
     this.rotate = false;
-    this.rotateSpeed = 5;
+    this.rotateSpeed = 2;
     this.helpersEnabled = true;
     this.gridEnabled = false;
     this.src = src;
@@ -117,7 +117,7 @@ Blinken.prototype.render = function () {
     this.frames++;
     this.push(this.readVidElement());
     if (this.rotate) {
-        this.dots.rotation.y += this.rotateSpeed * .001;
+        this.dots.rotation.y -= this.rotateSpeed * .001;
     }
     requestAnimationFrame( this.loop );
     this.renderer.render( this.scene, this.camera );
@@ -145,16 +145,15 @@ Blinken.prototype.updateV = function () {
 
 Blinken.prototype.populate = function () {
 
-    var boardGeometry = new THREE.BoxGeometry( this.mWidth + 1, this.mHeight + 1, 1);
+    var boardGeometry = new THREE.BoxGeometry( this.mWidth + 1, this.mHeight + 1, .8);
     var boardMat = new THREE.MeshStandardMaterial({
         color: 0x444444,
         side: THREE.DoubleSide
     });
     var board = new THREE.Mesh(boardGeometry, boardMat);
-
     var geometry;
-    var geometry = this.cube ? new THREE.BoxGeometry( .92, .92, .92 ) : new THREE.SphereGeometry( .2, 32, 32 ) ;
-    board.position.set( .5, -.5, this.cube ? -.1 : -.5 );
+    var geometry = this.cube ? new THREE.BoxGeometry( .92, .92, .92 ) : new THREE.SphereGeometry( .5, 32, 32 ) ;
+    board.position.set( .5, -.5, 0);
 
     this.dotGroup = new THREE.Group();
     for (var y = 1; y <= this.mHeight; y++) {
