@@ -101,6 +101,9 @@ html, body {
     left: $globalmargin;
     width: 100px;
     pointer-events: none;
+    strong {
+        color: #1fa9cf;
+    }
     &.on {
         display: block;
     }

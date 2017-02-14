@@ -58,6 +58,8 @@ Blinken.prototype.init = function () {
     $(document).on('change', '[gui-action=drawMode]', this.bounds.drawMode);
 
     this.conGeometries = document.getElementById('con-geometries');
+    this.conRows = document.getElementById('con-rows');
+    this.conCols = document.getElementById('con-cols');
     this.conCalls = document.getElementById('con-calls');
     this.conFaces = document.getElementById('con-faces');
     this.conVerts = document.getElementById('con-verts');
@@ -187,6 +189,9 @@ Blinken.prototype.populate = function () {
             this.addObject( this.gridHelper );
         }
     }
+
+    this.conRows.textContent = this.mHeight;
+    this.conCols.textContent = this.mWidth;
 
     this.camera.position.z = Math.max(this.mWidth, this.mHeight) + 10;
 };
