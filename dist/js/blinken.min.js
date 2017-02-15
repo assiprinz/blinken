@@ -240,8 +240,6 @@ Blinken.prototype.drawMode = function (e) {
     if (m === '') {
         return;
     }
-    console.log(m);
-    console.log(parseInt(m));
     this.mode = parseInt(m);
 };
 
@@ -339,8 +337,6 @@ Blinken.prototype.readVidElement = function () {
     var ctx = c.getContext('2d');
     c.width = this.mWidth;
     c.height = this.mHeight;
-
-    // 0: full input scaled, 1: top, 2: bottom, 3: left, 4: right;
     if (this.mode === 0) {
         ctx.drawImage(src, 0, 0, c.width, c.height);
     } else if (this.mode === 1) {
@@ -427,7 +423,7 @@ function dropZone( imgCallback ) {
                 video.load();
                 video.play();
             } catch( e ) {
-                console.log(e);
+                console.error(e);
             }
         };
         reader.readAsDataURL( allTheFiles[ 0 ] );
