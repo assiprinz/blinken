@@ -1,4 +1,11 @@
 $globalmargin: 5px;
+$janblue: #1fa9cf;
+$offwhite: #f0f0f0;
+$white: #fff;
+$darkgrey: #333;
+$fpsgood: #00aa66;
+$fpswarn: #ee8800;
+$fpsbad: #ee0044;
 
 * {
     margin: 0;
@@ -8,8 +15,8 @@ $globalmargin: 5px;
 html, body {
     width: 100%;
     height: 100%;
-    background: #f0f0f0;
-    font-size: 10px;
+    background: $offwhite;
+    font-size: .8em;
     font-family: Helvetica, Arial, sans-serif;
     color: #333;
     position: absolute;
@@ -18,6 +25,13 @@ html, body {
     left: 0;
     right: 0;
     bottom: 0;
+}
+a {
+    color: #333;
+    text-decoration: none;
+    &:hover {
+        color: $janblue;
+    }
 }
 #vcontainer {
     position: absolute;
@@ -30,8 +44,8 @@ html, body {
         min-width: 80px;
         position: relative;
         object-fit: fill;
-        background: #444;
-        box-shadow: 0 0 10px rgba(0,0,0,.1);
+        background: $darkgrey;
+        box-shadow: 0 0 10px rgba($darkgrey, .1);
     }
     #dropzone {
         width: 100%;
@@ -39,7 +53,6 @@ html, body {
         position: absolute;
         top: 0;
         right: 0;
-        font-size: 10px;
         display: table;
         cursor: default;
         .dropzone {
@@ -50,19 +63,16 @@ html, body {
             text-align: center;
             vertical-align: middle;
             font-weight: bold;
-            font-size: 12px;
-            color: #fff;
-            text-shadow: 0 0 3px rgba(0,0,0,.9);
+            color: $white;
+            text-shadow: 0 0 3px rgba($darkgrey, .9);
         }
     }
 }
 #credit {
     opacity: .5;
-    font-size: 8px;
     position: absolute;
     bottom: $globalmargin;
     right: $globalmargin;
-    pointer-events: none;
 }
 #gui {
     display: block;
@@ -70,27 +80,36 @@ html, body {
     margin: $globalmargin auto 0;
     text-align: center;
     user-select: none;
+    display: table;
+    border-spacing:5px;
     a {
         display: inline-block;
         padding: 4px 8px 4px;
-        background: #222;
-        color: #f0f0f0;
+        background: $darkgrey;
+        color: $offwhite;
         cursor: pointer;
         font-weight: bold;
         border-radius: 5px;
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
         &:hover {
-            background: #1fa9cf;
+            background: $janblue;
         }
     }
     #drawMode {
         display: inline-block;
+        border: none;
         padding: 4px;
-        height: 21px;
-        background: #222;
+        height: 20px;
+        background: $darkgrey;
         color: #f0f0f0;
         cursor: pointer;
         font-weight: bold;
         outline: none;
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
     }
 }
 #console {
@@ -101,9 +120,6 @@ html, body {
     left: $globalmargin;
     width: 100px;
     pointer-events: none;
-    strong {
-        color: #1fa9cf;
-    }
     &.on {
         display: block;
     }
@@ -112,6 +128,22 @@ html, body {
         clear: both;
         height: 0;
         pointer-events: none;
+        .fpsstat {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 4px;
+            margin-right: 5px;
+            &.good {
+                background: $fpsgood;
+            }
+            &.warn {
+                background: $fpswarn;
+            }
+            &.bad {
+                background: $fpsbad;
+            }
+        }
     }
     .left {
         display: block;

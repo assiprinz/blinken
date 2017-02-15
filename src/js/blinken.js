@@ -327,7 +327,10 @@ Blinken.prototype.countFps = function () {
     this.frameTimeIndex = (this.frameTimeIndex + 1) % this.numFramesToAverage;
     var averageElapsedTime = this.totalTimeForFrames / this.numFramesToAverage;
     var fps = 1 / averageElapsedTime;
-    this.fpsElement.innerText = fps.toFixed(0);
+    var f = 'bad';
+    if (fps > 15) f = 'warn';
+    if (fps > 30) f = 'good';
+    this.fpsElement.innerHTML = '<div class="fpsstat ' + f + '"></div>' + fps.toFixed(0);
 };
 
 Blinken.prototype.readVidElement = function () {
